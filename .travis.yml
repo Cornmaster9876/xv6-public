@@ -1,0 +1,14 @@
+language: c
+script: make && make fs.img
+deploy:
+  provider: releases
+  api_key:
+    secure: Yqgz/9Tx3NbUNrRpo3AEFRqQfNqcybnf0+e59U8+A9yL0EgpjVm2bEnYMlCk9Xhag/Pu9fyU9KHihAr/R94hB7VICgf7m5LYdYEaNCwaG7c9BtPdmD8HexLIyee2v0egK1Ym2dbdNhPgyShKLmHhWrRgQTlTsOFCcFGVJSFplFLLDuAe+bQnUmV/k6vITpAPzuacU9/IS5Hi6CPm7AZeZ6Mshg8xvikJ8KWZsmMXDGx1qq83eFNHdOe1q9XoPVvbLVliNFgsND5QteDJC8ej3VtB8ojQlVyki5P/CoZmXnSCvocb9FBchwbIHFlqzypb4tTyIB7ZIGZL910+EQCAMztnlMBwQabI4tREuvUrPjHRzo0AQE4tR3Jspet6JakfAX5gybjIG0lWuHyyR+metZZUywqP+tqGqgI7VCSR1w8SIGcSu6cb99iea0SlbwQsuaNUdK2b8M/Lk2coUm00d3l7ow65tfKpfXYAdkndB/B+3LPqHwXOChwekYKLvcvClKYh5kmr21/GcCd5179kITe+9DLAcFQhhPgnZnUi8LxsdL+gwXIrWT6HxW7YGQ+M8V3pLZwBp/bvBK3MBt4QvSTRrMORpwyucBCNN4bBlIu0pRP52eAoOx8wb6yE1iPJRQJE40fxlvKeIq04I1kslAvmxMntbgyXPuu5ZLCbO0A=
+  file:
+- fs.img
+- xv6.img
+skip_cleanup: true
+  on:
+    repo: Cornmaster9876/xv6-public
+    branch: project_1
+    tags: true
