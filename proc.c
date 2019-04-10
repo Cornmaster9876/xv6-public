@@ -537,9 +537,9 @@ int
 getprocs()
 {
   struct proc *p;
-  int counter;
-
   acquire(&ptable.lock);
+  int counter;
+  counter=0;
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state != UNUSED && p->state != ZOMBIE){
       counter = counter+1;
