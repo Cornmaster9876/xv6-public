@@ -321,6 +321,7 @@ wait(void)
 //  - swtch to start running that process
 //  - eventually that process transfers control
 //      via swtch back to the scheduler.
+
 void
 scheduler(void)
 {
@@ -364,7 +365,7 @@ scheduler(void)
       proc = p;
       switchuvm(p);
       p->state = RUNNING;
-      swtch(&cpu->scheduler, proc->context);
+      swtch(&cpu->scheduler, p->context);
       switchkvm();
 
       // Process is done running for now.
@@ -376,6 +377,7 @@ scheduler(void)
 
   }
 }
+
 // Enter scheduler.  Must hold only ptable.lock
 // and have changed proc->state. Saves and restores
 // intena because intena is a property of this
@@ -383,6 +385,7 @@ scheduler(void)
 // be proc->intena and proc->ncli, but that would
 // break in the few places where a lock is held but
 // there's no process.
+
 void
 sched(void)
 {
@@ -569,3 +572,16 @@ getprocs()
   release(&ptable.lock); 
   return counter;
 }
+
+int
+sys_settickets(void)  
+{ 
+  struct proc *p; 
+  proc = p;
+  int n;  
+  if(argint(0, &n) < 0){
+    return -1;
+  }
+  proc->tickets = n;  
+  return n;  
+ }  
