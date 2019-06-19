@@ -100,6 +100,5 @@ int
 sys_physAddress(char* s)
 {
   argstr(0, &s);
-  physAddress(s);
-  return s;
+  return physAddress(s);
 }
