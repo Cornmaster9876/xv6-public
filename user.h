@@ -24,6 +24,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int getprocs(void);
+char* physAddress(char*);
 
 // ulib.c
 int stat(const char*, struct stat*);
