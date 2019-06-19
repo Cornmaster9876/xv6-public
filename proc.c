@@ -619,8 +619,9 @@ getPhysDir(void* virtualAddress)
   //obtener el indice de TABLA correspondiente a la memoria virtual
   pte = &pgtab[PTX(virtualAddress)];
   //Convertir direccion virtual a fisica con V2P (virtual to phyisical)
-  physAddress = (char*)V2P(PTE_ADDR(*pte));
+  physAddress = (char*)P2V(PTE_ADDR(*pte));
   cprintf("Direccion fisica: %d\n", physAddress);
   return 0;
     }
+}
 }
