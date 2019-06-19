@@ -597,7 +597,7 @@ int
 getPhysDir(void* virtualAddress)
 {
   struct proc *p;
-  int physAddress;
+  char *physAddress;
   pde_t *pgdir, *pgtab, *pde;
   pte_t *pte;
   acquire(&ptable.lock);
@@ -621,7 +621,8 @@ getPhysDir(void* virtualAddress)
   //Convertir direccion virtual a fisica con V2P (virtual to phyisical)
   physAddress = (char*)P2V(PTE_ADDR(*pte));
   cprintf("Direccion fisica: %d\n", physAddress);
-  return 0;
+  
     }
 }
+return 0;
 }
