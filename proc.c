@@ -594,7 +594,7 @@ getprocs()
 }
 
 int
-physAdress(void* virtualAddress)
+physAddress(void* virtualAddress)
 {
   int pAddress;
   struct cpu *c = mycpu();
