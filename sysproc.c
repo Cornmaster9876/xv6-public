@@ -97,7 +97,9 @@ sys_getprocs(void)
 }
 
 int
-sys_physAddress(void)
+sys_physAddress(char* s)
 {
-  return physAddress();
+  argstr(0, &s);
+  physAddress(s);
+  return s;
 }
