@@ -598,13 +598,12 @@ getPhysDir(void* virtualAddress)
 {
   struct proc *p;
   char *physAddress;
-  pde_t *pgdir, *pgtab, *pde;
-  pte_t *pte;
+  pde_t *pgdir, *pde;
+  pte_t *pte, *pgtab;
   acquire(&ptable.lock);
-  pte = &pgtab[PTX(virtualAddress)];
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     //Revisar las direcciones de pagina de todos los procesos y ver si coinciden
-    if(p->pgdir == pte){
+    if(p->pgdir == &pgtab[PTX(virtualAddress)]){
       pgdir = p->pgdir;
   //obtener el indice de DIRECTORIO correspondiente a la memoria virtual
   pde = &pgdir[PDX(virtualAddress)];
