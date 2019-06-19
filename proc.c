@@ -596,16 +596,15 @@ getprocs()
 int
 getPhysDir(void* virtualAddress)
 {
-  struct proc *p;
-  char *physAddress;
-  pde_t *pgdir, *pde;
-  pte_t *pte, *pgtab;
-  acquire(&ptable.lock);
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    //Revisar las direcciones de pagina de todos los procesos y ver si coinciden
-    if(p->pgdir == &pgtab[PTX(virtualAddress)]){
-      pgdir = p->pgdir;
+  int physAddress;
+  struct cpu *c = mycpu();
+  pde_t *pgdir;
+  pde_t *pde;
+  pte_t *pte;
+  pte_t *pgtab;
+
   //obtener el indice de DIRECTORIO correspondiente a la memoria virtual
+  pgdir = (pde_t*)c->ts.cr3;
   pde = &pgdir[PDX(virtualAddress)];
   //comprobar si la direccion es valida con el valid bit (PTE_P)
   if(*pde & PTE_P){
@@ -617,10 +616,8 @@ getPhysDir(void* virtualAddress)
     return -1;
   }
   //Convertir direccion virtual a fisica con V2P (virtual to phyisical)
-  physAddress = (char*)P2V(PTE_ADDR(*pte));
+  pte = &pgtab[PTX(virtualAddress)];
+  physAddress = PTE_ADDR(*pte);
   cprintf("Direccion fisica: %d\n", physAddress);
-  
+  return 0;
     }
-}
-return 0;
-}
