@@ -95,9 +95,3 @@ sys_getprocs(void)
 {
   return getprocs();
 }
-
-int
-sys_settickets(void)
-{
-  return settickets();
-}
